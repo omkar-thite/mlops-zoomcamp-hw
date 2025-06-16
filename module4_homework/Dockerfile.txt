@@ -1,0 +1,14 @@
+FROM agrigorev/zoomcamp-model:mlops-2024-3.10.13-slim
+
+# Create a non-root user and group
+RUN addgroup --system appgroup && adduser --system --group appuser
+
+WORKDIR /app
+
+COPY "requirements.txt" "starter.py"  /app
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+USER appuser 
+
+CMD ["python", "starter.py", "2023", "5"]
